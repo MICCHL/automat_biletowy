@@ -1,12 +1,11 @@
 class Coin:
-    def __init__(self, nom=0.0, il=0):
-
-        self.__nominal = nom
-        self.__ilosc = il
+    def __init__(self, money=0.0, number=0):
+        self.__nominal = money
+        self.__ilosc = number
 
     def __str__(self):
         text = ""
-        text += str(self.__nominal) + " ilość :" + str(self.__ilosc)
+        text += f'{str(self.__nominal)} ilość : {str(self.__ilosc)}'
         return text
 
     def wartosc(self):

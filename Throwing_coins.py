@@ -1,4 +1,14 @@
-from interface import *
+from tkinter import Button
+from tkinter import Frame
+from tkinter import LEFT
+from tkinter import RIGHT
+from tkinter import W
+from tkinter import Y
+SZEROKOSC_1 = 15
+WYSOKOSC_1 = 3
+
+
+
 class Throwing_coins(Frame):
     def __init__(self, master):
         self.__coins = 0.0
@@ -7,66 +17,90 @@ class Throwing_coins(Frame):
         self.create_widgets(master)
         self.center()
 
-    def create_widgets(self, X):
+    def create_widgets(self, x):
+        left_frame = Frame(self)
+        left_frame.pack(side=LEFT, fill=Y)
+        side_frame = Frame(self)
+        side_frame.pack(side=RIGHT, fill=Y)
 
-        leftFrame = Frame(self)
-        leftFrame.pack(side=LEFT, fill=Y)
-        sideFrame = Frame(self)
-        sideFrame.pack(side=RIGHT, fill=Y)
-
-        self.label = Button(leftFrame,text="Zapłać:", height=4,width=15,background="grey")
+        self.label = Button(left_frame, text="Zapłać:", height=2,
+                            width=SZEROKOSC_1, background="grey")
         self.label.pack(fill=Y, anchor=W)
 
-        self.key1 = Button(leftFrame, text="0.01 zł ", height=4,width=15,background="white", command=lambda: self.thr0w(0.01, X))
+        self.key1 = Button(left_frame, text="0.01 zł ", height=WYSOKOSC_1,
+                           width=SZEROKOSC_1, background="white",
+                           command=lambda: self.throw(0.01, x))
         self.key1.pack(fill=Y, anchor=W)
 
-        self.key2 = Button(leftFrame, text="0.02 zł",height=4,width=15, background="white", command=lambda: self.thr0w(0.02, X))
+        self.key2 = Button(left_frame, text="0.02 zł", height=WYSOKOSC_1,
+                           width=SZEROKOSC_1, background="white",
+                           command=lambda: self.throw(0.02, x))
         self.key2.pack(fill=Y, anchor=W)
 
-        self.key3 = Button(leftFrame, text="0.05 zł",height=4,width=15, background="white", command=lambda: self.thr0w(0.05, X))
+        self.key3 = Button(left_frame, text="0.05 zł", height=WYSOKOSC_1,
+                           width=SZEROKOSC_1, background="white",
+                           command=lambda: self.throw(0.05, x))
         self.key3.pack(fill=Y, anchor=W)
 
-        self.key4 = Button(leftFrame, text="0.1 zł  ", height=4,width=15,background="white", command=lambda: self.thr0w(0.1, X))
-        self.key4.pack(fill=Y,anchor=W)
+        self.key4 = Button(left_frame, text="0.1 zł  ", height=WYSOKOSC_1,
+                           width=SZEROKOSC_1, background="white",
+                           command=lambda: self.throw(0.1, x))
+        self.key4.pack(fill=Y, anchor=W)
 
-        self.key5 = Button(leftFrame, text="0.2 zł ",height=4,width=15,background="white", command=lambda: self.thr0w(0.2, X))
+        self.key5 = Button(left_frame, text="0.2 zł ", height=WYSOKOSC_1,
+                           width=SZEROKOSC_1, background="white",
+                           command=lambda: self.throw(0.2, x))
         self.key5.pack(fill=Y, anchor=W)
 
-        self.key6 = Button(leftFrame, text="0.5 zł ",height=4,width=15,background="white", command=lambda: self.thr0w(0.5, X))
+        self.key6 = Button(left_frame, text="0.5 zł ", height=WYSOKOSC_1,
+                           width=SZEROKOSC_1, background="white",
+                           command=lambda: self.throw(0.5, x))
         self.key6.pack(fill=Y, anchor=W)
 
-        self.key7 = Button(sideFrame, text="1.0 zł  ",height=4,width=15,background="white", command=lambda: self.thr0w(1.0, X))
+        self.key7 = Button(left_frame, text="1.0 zł  ", height=WYSOKOSC_1,
+                           width=SZEROKOSC_1, background="white",
+                           command=lambda: self.throw(1.0, x))
         self.key7.pack(fill=Y, anchor=W)
 
-        self.key8 = Button(sideFrame, text="2.0 zł ",height=4,width=15,background="white", command=lambda: self.thr0w(2.0, X))
+        self.key8 = Button(left_frame, text="2.0 zł ", height=WYSOKOSC_1,
+                           width=SZEROKOSC_1, background="white",
+                           command=lambda: self.throw(2.0, x))
         self.key8.pack(fill=Y, anchor=W)
 
-        self.key9 = Button(sideFrame, text="5.0 zł ",height=4,width=15, background="white", command=lambda: self.thr0w(5.0, X))
+        self.key9 = Button(left_frame, text="5.0 zł ", height=WYSOKOSC_1,
+                           width=SZEROKOSC_1, background="white",
+                           command=lambda: self.throw(5.0, x))
         self.key9.pack(fill=Y, anchor=W)
 
-        self.key9 = Button(sideFrame, text="10.0 zł ", height=4, width=15, background="white",command=lambda: self.thr0w(10.0, X))
+        self.key9 = Button(left_frame, text="10.0 zł ", height=WYSOKOSC_1,
+                           width=SZEROKOSC_1, background="white",
+                           command=lambda: self.throw(10.0, x))
         self.key9.pack(fill=Y, anchor=W)
 
-        self.key9 = Button(sideFrame, text="20.0 zł ", height=4, width=15, background="white",command=lambda: self.thr0w(20.0, X))
+        self.key9 = Button(left_frame, text="20.0 zł ", height=WYSOKOSC_1,
+                           width=SZEROKOSC_1, background="white",
+                           command=lambda: self.throw(20.0, x))
         self.key9.pack(fill=Y, anchor=W)
 
-        self.key9 = Button(sideFrame, text="50.0 zł ", height=4, width=15, background="white",command=lambda: self.thr0w(50.0, X))
+        self.key9 = Button(left_frame, text="50.0 zł ", height=WYSOKOSC_1,
+                           width=SZEROKOSC_1, background="white",
+                           command=lambda: self.throw(50.0, x))
         self.key9.pack(fill=Y, anchor=W)
 
-        self.wroc = Button(sideFrame, text="Wróć",height=4,width=15,background="grey", command=lambda: self.thr0w(0.0, X))
+        self.wroc = Button(left_frame, text="Wróć", height=2,
+                           width=SZEROKOSC_1, background="grey",
+                           command=lambda: self.throw(0.0, x))
         self.wroc.pack(fill=Y, anchor=W)
 
-    def thr0w(self, coin, X):
-
+    def throw(self, coin, x):
         self.__coins = coin
-        X.quit()
-        X.destroy()
+        x.quit()
+        x.destroy()
 
     def get_coin(self):
         return self.__coins
 
     def center(self):
-
         self.master.update_idletasks()
         width = self.master.winfo_width()
         height = self.master.winfo_height()

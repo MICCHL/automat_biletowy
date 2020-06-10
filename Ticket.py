@@ -1,14 +1,16 @@
 
 class Ticket:
-    count=0
+    count = 0
     def __init__(self, name = "", prize = 0.0):
+
         self.__nazwa = name
         self.__cena = prize
         self.__nr_produktu = Ticket.count
         Ticket.counting()
+
     def __str__(self):
         text = ""
-        text += str(self.__nazwa + " :" + str(self.__cena))
+        text += f'{self.__nazwa} :{self.__cena}'
         return text
 
 

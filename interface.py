@@ -1,10 +1,33 @@
-from tkinter import *
-from Give_Back import *
-from Throwing_coins import *
-from Coins import *
-from Ticket import *
+from tkinter import Button
+from tkinter import END
+from tkinter import Frame
+from tkinter import LEFT
+from tkinter import RIGHT
+from tkinter import N
+from tkinter import SUNKEN
+from tkinter import Text
+from tkinter import Tk
+from tkinter import WORD
+from tkinter import X
+from tkinter import Y
 
-class Maschine(Frame):
+from Give_Back import Give_Back
+from Throwing_coins import Throwing_coins
+from Coins import Coin
+
+from Ticket import Ticket
+
+SZEROKOSC = 25
+WYSOKOSC = 5
+KOLOR = '#9F9FDF'
+TEN = 10
+ELEVEN = 11
+NOMINAL = [50.0, 20.0, 10.0, 5.0, 2.0, 1.0, 0.5, 0.2, 0.1, 0.05, 0.02, 0.01]
+ILOSC = [3, 5, 4, 0, 12, 0, 14, 0, 4, 0, 55, 100]
+
+
+
+class Maschine (Frame):
     def __init__(self, parent):
         Frame.__init__(self, parent)
 
@@ -35,48 +58,73 @@ class Maschine(Frame):
         self.parent.title("Automat biletowy MPK")
         self.pack(fill=X, expand=True)
 
-        leftFrame=Frame(self)
-        leftFrame.pack(side=LEFT,fill=Y)
-        sideFrame=Frame(self)
-        sideFrame.pack(side=RIGHT,fill=Y)
+        left_frame = Frame(self)
+        left_frame.pack(side=LEFT, fill=Y)
+        side_frame = Frame(self)
+        side_frame.pack(side=RIGHT, fill=Y)
 
-
-        k_bilet1 = Button(leftFrame, text="Bilet normalny 20 min\n3,40zł", height=5, width=25, bg="#9F9FDF",overrelief=SUNKEN,command=lambda: self.keys_operation(0))
+        k_bilet1 = Button(left_frame, text="Bilet normalny 20 min\n3,40zł",
+                          height=WYSOKOSC, width=SZEROKOSC, bg=KOLOR, overrelief=SUNKEN,
+                          command=lambda: self.keys_operation(0))
         k_bilet1.pack(fill=Y, anchor=N)
 
-        k_bilet2 = Button(leftFrame, text="Bilet ulgowy 20 min\n1,70zł", height=5, width=25, bg="#9F9FDF",overrelief=SUNKEN,command=lambda: self.keys_operation(1))
+        k_bilet2 = Button(left_frame, text="Bilet ulgowy 20 min\n1,70zł",
+                          height=WYSOKOSC, width=SZEROKOSC, bg=KOLOR, overrelief=SUNKEN,
+                          command=lambda: self.keys_operation(1))
         k_bilet2.pack(fill=Y, anchor=N)
 
-        k_bilet3 = Button(leftFrame, text="Bilet normalny 50 min \n4,60zł", height=5, width=25, bg="#9F9FDF", overrelief=SUNKEN,command=lambda: self.keys_operation(2))
+        k_bilet3 = Button(left_frame, text="Bilet normalny 50 min \n4,60zł",
+                          height=WYSOKOSC, width=SZEROKOSC, bg=KOLOR,
+                          overrelief=SUNKEN,
+                          command=lambda: self.keys_operation(2))
         k_bilet3.pack(fill=Y, anchor=N)
 
-        k_bilet4 = Button(leftFrame, text="Bilet ulgowy 50 min\n2,30zł", height=5, width=25, bg="#9F9FDF",overrelief=SUNKEN,command=lambda: self.keys_operation(3))
+        k_bilet4 = Button(left_frame, text="Bilet ulgowy 50 min\n2,30zł",
+                          height=WYSOKOSC, width=SZEROKOSC, bg=KOLOR,
+                          overrelief=SUNKEN,
+                          command=lambda: self.keys_operation(3))
         k_bilet4.pack(fill=Y, anchor=N)
 
-        k_bilet5 = Button(leftFrame, text="Bilet normalny 90 min\n6zł", height=5, width=25, bg="#9F9FDF",overrelief=SUNKEN,command=lambda: self.keys_operation(4))
+        k_bilet5 = Button(left_frame, text="Bilet normalny 90 min\n6zł",
+                          height=WYSOKOSC, width=SZEROKOSC, bg=KOLOR,
+                          overrelief=SUNKEN,
+                          command=lambda: self.keys_operation(4))
         k_bilet5.pack(fill=Y, anchor=N)
 
-        k_bilet6 = Button(leftFrame, text="Bilet ulgowy 90 min\n3zł", height=5, width=25, bg="#9F9FDF",overrelief=SUNKEN, command=lambda: self.keys_operation(5))
+        k_bilet6 = Button(left_frame, text="Bilet ulgowy 90 min\n3zł",
+                          height=WYSOKOSC,
+                          width=SZEROKOSC, bg=KOLOR, overrelief=SUNKEN,
+                          command=lambda: self.keys_operation(5))
         k_bilet6.pack(fill=Y, anchor=N)
 
-        self.screen = Text(sideFrame, width=25, height=10, wrap=WORD)
+        self.screen = Text(side_frame, width=SZEROKOSC, height=10, wrap=WORD)
         self.screen.pack(fill=Y, anchor=N)
-        self.screen.insert(0.0, "Nazwa:"+self.text+ "\nKwota:" + str(self.sum_ticket)+"\nWrzucono:" + str(self.sum_coins))
+        self.screen.insert(0.0, f'Nazwa: {self.text} \nKwota:{self.sum_ticket}'
+                                f' \nWrzucono:{self.sum_coins}')
 
-
-        key_wrzuc = Button(sideFrame, text="Zapłać",width=25, height=4,bg="#55A41C", overrelief=SUNKEN,command=self.throw_coins)
+        key_wrzuc = Button(side_frame, text="Zapłać", width=SZEROKOSC, height=4,
+                           bg="#55A41C", overrelief=SUNKEN,
+                           command=self.throw_coins)
         key_wrzuc.pack(fill=Y, anchor=N)
 
-        key_oddaj = Button(sideFrame, text="Zwróć monety",width=25, height=4,bg="#C91F16", overrelief=SUNKEN,command=lambda: self.g_b_coins())
+        key_oddaj = Button(side_frame, text="Zwróć monety", width=SZEROKOSC, height=4,
+                           bg="#C91F16", overrelief=SUNKEN,
+                           command=lambda: self.g_b_coins())
         key_oddaj.pack(fill=Y, anchor=N)
 
-        key_kup = Button(sideFrame, text="KUP", width=25, height=4, bg="white", overrelief=SUNKEN,command=lambda: self.keys_operation(11))
+        key_kup = Button(side_frame, text="KUP", width=SZEROKOSC, height=4,
+                         bg="white", overrelief=SUNKEN,
+                         command=lambda: self.keys_operation(11))
         key_kup.pack(fill=Y, anchor=N)
 
-        key_oddaj = Button(sideFrame, text="Zabierz reszte", width=25, height=2, bg="#A7A7A7", overrelief=SUNKEN,command=lambda: self.take_coins())
+        key_oddaj = Button(side_frame, text="Zabierz reszte", width=SZEROKOSC,
+                           height=2, bg="#A7A7A7", overrelief=SUNKEN,
+                           command=lambda: self.take_coins())
         key_oddaj.pack(fill=Y, anchor=N)
 
-        key_cofnij = Button(sideFrame, text="Od początku", width=25, height=2, bg="#A7A7A7", overrelief=SUNKEN,command=lambda: self.keys_operation(10))
+        key_cofnij = Button(side_frame, text="Od początku", width=SZEROKOSC, height=2,
+                            bg="#A7A7A7", overrelief=SUNKEN,
+                            command=lambda: self.keys_operation(10))
         key_cofnij.pack(fill=Y, anchor=N)
 
     def center(self):
@@ -89,14 +137,13 @@ class Maschine(Frame):
 
     def inicjalize_coins(self):
 
-        nominal = [50.0, 20.0, 10.0, 5.0, 2.0, 1.0, 0.5, 0.2, 0.1, 0.05, 0.02, 0.01]
-        ilosc = [3, 5, 4, 0, 12, 0, 14, 0, 4, 0, 55, 100]
-
-        self.money_in_maschine = [Coin(nom=nominal[x], il=ilosc[x]) for x in range(12)]
+        self.money_in_maschine = [Coin(money=NOMINAL[x], number=ILOSC[x])
+                                  for x in range(12)]
 
     def inicjalize_ticket(self):
 
-        nazwy = ["Normalny 20 min","Ulgowy 20 min","Normalny 50 min ","Ulgowy 50 min ","Normalny 90 min","Ulgowy 90 min"]
+        nazwy = ["Normalny 20 min", "Ulgowy 20 min", "Normalny 50 min ",
+                 "Ulgowy 50 min ", "Normalny 90 min", "Ulgowy 90 min"]
         cena = [3.40, 1.70, 4.6, 2.30, 6, 3]
 
         self.ticket = [Ticket(name=nazwy[x], prize=cena[x]) for x in range(6)]
@@ -113,7 +160,8 @@ class Maschine(Frame):
             self.sum_coins += moneta
             self.sum_coins = round(self.sum_coins, 2)
             self.monety_wrzucane.append(moneta)
-            self.write("Nazwa:"+self.text+ "\nKwota:" + str(self.sum_ticket)+"\nWrzucono:" + str(self.sum_coins))
+            self.write(f'Nazwa: {self.text}  \nKwota: {self.sum_ticket}'
+                       f'\nWrzucono: {self.sum_coins}')
 
     def g_b_coins(self):
 
@@ -122,7 +170,9 @@ class Maschine(Frame):
         self.monety_wrzucane = []
         self.sum_coins = 0.0
         self.screen.delete(0.0, END)
-        self.screen.insert(0.0, "Nazwa:"+self.text+ "\nKwota:" + str(self.sum_ticket)+"\nWrzucono:" + str(self.sum_coins))
+        self.screen.insert(0.0, f'Nazwa: {self.text} \nKwota: '
+                                f'{self.sum_ticket} '
+                                f'\nWrzucono: {self.sum_coins}')
 
     def take_coins(self):
 
@@ -133,8 +183,9 @@ class Maschine(Frame):
         mach.mainloop()
         self.money_rest = []
         self.text = ""
-        self.sum_ticket =0.0
-        self.write("Nazwa:"+self.text+ "\nKwota:" + str(self.sum_ticket)+"\nWrzucono:" + str(self.sum_coins))
+        self.sum_ticket = 0.0
+        self.write(f'Nazwa:{self.text}  \nKwota: {self.sum_ticket}'
+                   f'  \nWrzucono: {self.sum_coins}')
 
     def take_product(self):
 
@@ -143,7 +194,7 @@ class Maschine(Frame):
         gbc = Give_Back(prod, self.buy_ticket, "Twoje bilety ")
         prod.mainloop()
         self.buy_ticket = []
-        self.write("Nazwa:"+self.text + "\nKwota:" + str(self.sum_ticket)+"\nWrzucono:" + str(self.sum_coins))
+        self.write(f'Nazwa: {self.text} \nKwota: {self.sum_ticket} \nWrzucono:{self.sum_coins}')
 
     def rest(self, ticket):
 
@@ -152,11 +203,9 @@ class Maschine(Frame):
                 if j == k.get_nominal():
                     k.inc()
 
-
         for i in self.money_in_maschine:
             self.sum_in_maschine += i.wartosc()
         self.sum_in_maschine = round(self.sum_in_maschine, 2)
-
 
         for obj in self.money_in_maschine:
             print(obj)
@@ -164,14 +213,15 @@ class Maschine(Frame):
 
         if self.reszta < self.sum_in_maschine:
 
-            for l in self.money_in_maschine:
+            for i in self.money_in_maschine:
                 logic = True
                 while logic:
-                    if (round(self.reszta, 2) - l.get_nominal() >= 0) and (l.get_ilosc() > 0):
-                        self.money_rest.append(l.get_nominal())
-                        self.reszta -= l.get_nominal()
+                    if (round(self.reszta, 2) - i.get_nominal() >= 0) \
+                            and (i.get_ilosc() > 0):
+                        self.money_rest.append(i.get_nominal())
+                        self.reszta -= i.get_nominal()
                         self.reszta = round(self.reszta, 2)
-                        l.dec()
+                        i.dec()
                     else:
                         logic = False
                 if self.reszta == 0.0:
@@ -183,7 +233,8 @@ class Maschine(Frame):
                 self.sum_ticket = 0.0
                 self.take_product()
                 self.text = ""
-                self.write("Nazwa:"+self.text+ "\nKwota:" + str(self.sum_ticket)+"\nWrzucono:" + str(self.sum_coins) + "\nZabierz resztę ")
+                self.write(f'Nazwa: {self.text} \nKwota: {self.sum_ticket}'
+                           f' \nWrzucono: {self.sum_coins} \nZabierz resztę ')
             else:
                 for j in self.money_rest:
                     for k in self.money_in_maschine:
@@ -204,12 +255,13 @@ class Maschine(Frame):
 
     def keys_operation(self, key):
 
-        if key == 10:
+        if key == TEN:
             self.choose_ticket = []
             self.text = ""
             self.sum_ticket = 0.0
             self.buy_ticket = []
-            self.write("Nazwa:"+self.text + "\nKwota:" + str(self.sum_ticket)+ "\nWrzucono:" + str(self.sum_coins))
+            self.write(f'Nazwa: {self.text} \nKwota: {self.sum_ticket}'
+                       f' \nWrzucono: {self.sum_coins}')
 
         obj = ""
         if (key >= 0) and (key <= 5):
@@ -224,12 +276,12 @@ class Maschine(Frame):
                 self.sum_ticket += moneta
                 self.sum_ticket = round(self.sum_ticket, 2)
                 print(self.sum_ticket)
-                self.text += "\n" +str(obj.get_nazwa())
+                self.text += "\n" + str(obj.get_nazwa())
                 self.buy_ticket.append(obj.get_nazwa())
-                self.write("Nazwa:" + self.text + "\nKwota:" + str(self.sum_ticket) + "\nWrzucono:" + str(self.sum_coins))
+                self.write(f'Nazwa: {self.text} \nKwota: {self.sum_ticket}'
+                           f' \nWrzucono: {self.sum_coins}')
 
-
-        if (key == 11) and not (self.text == ""):
+        if key == ELEVEN and not self.text == "":
             if self.sum_coins > self.sum_ticket:
                 self.reszta = self.sum_coins - self.sum_ticket
                 print("Reszta :", self.reszta)
@@ -239,16 +291,15 @@ class Maschine(Frame):
                 self.reszta = 0.0
                 self.sum_coins = 0.0
 
-
                 for i in self.monety_wrzucane:
                     for j in self.money_in_maschine:
                         if i == j.get_nominal():
                             j.inc()
 
-
                 self.monety_wrzucane = []
                 self.text = ""
-                self.write("Nazwa:" + self.text + "\nKwota:" + str(self.sum_ticket) + "\nWrzucono:" + str(self.sum_coins))
+                self.write(f'Nazwa: {self.text} \nKwota: {self.sum_ticket}'
+                           f' \nWrzucono: {self.sum_coins}')
                 self.take_product()
             else:
                 self.write("Za mało pieniędzy \nWybierz ponownie ")
@@ -259,7 +310,6 @@ class Maschine(Frame):
             self.text = ""
 
     def take_coins(self):
-        #odebranie rezty
         print("reszta :", self.money_rest)
         mach = Tk()
         mach.title("Zabierz RESZTĘ ")
@@ -267,7 +317,8 @@ class Maschine(Frame):
         mach.mainloop()
         self.money_rest = []
         self.text = ""
-        self.write("Nazwa:"+self.text+ "\nKwota:" + str(self.sum_ticket)+"\nWrzucono:" + str(self.sum_coins))
+        self.write(f'Nazwa: {self.text} \nKwota: {self.sum_ticket} '
+                   f'\nWrzucono: {self.sum_coins}')
 
     def take_ticket(self):
 
@@ -277,11 +328,10 @@ class Maschine(Frame):
         prod.mainloop()
         self.kupione_bilety = []
         self.text = ""
-        self.write("Nazwa:"+self.text+ "\nKwota:" + str(self.sum_ticket)+"\nWrzucono:" + str(self.sum_coins))
+        self.write(f'Nazwa: {self.text} \nKwota: {self.sum_ticket} \nWrzucono:{self.sum_coins}')
 
     def write(self, text):
 
         self.screen.delete(0.0, END)
         self.screen.insert(0.0, text)
-
 

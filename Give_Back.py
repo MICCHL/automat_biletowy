@@ -1,27 +1,33 @@
-from interface import *
+from tkinter import BOTTOM
+from tkinter import Button
+from tkinter import Frame
+from tkinter import Text
+from tkinter import Y
+
+
 class Give_Back(Frame):
     def __init__(self, master, bc, text):
 
+        super().__init__(master)
         self.typ = text
         self.coins = bc
-        super(Give_Back, self).__init__(master)
         self.pack()
         self.create_widgets(master)
         self.center()
 
-    def create_widgets(self, X):
+    def create_widgets(self, x):
 
-        topFrame = Frame(self)
-        topFrame.pack(fill=Y)
-        lowFrame = Frame(self)
-        lowFrame.pack(side=BOTTOM,fill=Y)
+        top_frame = Frame(self)
+        top_frame.pack(fill=Y)
+        low_frame = Frame(self)
+        low_frame.pack(side=BOTTOM, fill=Y)
 
-        self.coins_list = Text(topFrame, width=25, height=20, bg="white")
+        self.coins_list = Text(top_frame, width=25, height=20, bg="white")
         self.coins_list.pack()
         self.write_coins()
 
-
-        self.key1 = Button(lowFrame, text="Zabierz", height=3, width=28, background="red", command=lambda: self.back(X))
+        self.key1 = Button(low_frame, text="Zabierz", height=3, width=28,
+                           background="red", command=lambda: self.back(x))
         self.key1.pack()
 
     def write_coins(self):
@@ -33,10 +39,10 @@ class Give_Back(Frame):
 
         self.coins_list.insert(0.0, lista)
 
-    def back(self, X):
+    def back(self, x):
 
-        X.quit()
-        X.destroy()
+        x.quit()
+        x.destroy()
 
     def center(self):
         self.master.update_idletasks()
