@@ -34,8 +34,7 @@ class Give_Back(Frame):
 
         lista = ""
         lista += self.typ + " :\n"
-        for i in self.coins:
-            lista += str(i) + "\n"
+        lista = '\n'.join([f'{self.typ} :'] + [str(c) for c in self.coins])
 
         self.coins_list.insert(0.0, lista)
 

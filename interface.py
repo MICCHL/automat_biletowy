@@ -63,39 +63,27 @@ class Maschine (Frame):
         side_frame = Frame(self)
         side_frame.pack(side=RIGHT, fill=Y)
 
-        k_bilet1 = Button(left_frame, text="Bilet normalny 20 min\n3,40zł",
-                          height=WYSOKOSC, width=SZEROKOSC, bg=KOLOR, overrelief=SUNKEN,
-                          command=lambda: self.keys_operation(0))
-        k_bilet1.pack(fill=Y, anchor=N)
+        nazwy_biletów = [
+            'Bilet normalny 20 min\n3,40 zł',
+            'Bilet ulgowy 20 min\n1,70 zł',
+            'Bilet normalny 50 min \n4,60zł',
+            'Bilet ulgowy 50 min\n2, 30zł',
+            'Bilet normalny 90 min\n6zł',
+            'Bilet ulgowy 90 min\n3zł'
+        ]
 
-        k_bilet2 = Button(left_frame, text="Bilet ulgowy 20 min\n1,70zł",
-                          height=WYSOKOSC, width=SZEROKOSC, bg=KOLOR, overrelief=SUNKEN,
-                          command=lambda: self.keys_operation(1))
-        k_bilet2.pack(fill=Y, anchor=N)
+        k_bilety = []
 
-        k_bilet3 = Button(left_frame, text="Bilet normalny 50 min \n4,60zł",
-                          height=WYSOKOSC, width=SZEROKOSC, bg=KOLOR,
-                          overrelief=SUNKEN,
-                          command=lambda: self.keys_operation(2))
-        k_bilet3.pack(fill=Y, anchor=N)
+        for i, nazwa in enumerate(nazwy_biletów):
 
-        k_bilet4 = Button(left_frame, text="Bilet ulgowy 50 min\n2,30zł",
-                          height=WYSOKOSC, width=SZEROKOSC, bg=KOLOR,
-                          overrelief=SUNKEN,
-                          command=lambda: self.keys_operation(3))
-        k_bilet4.pack(fill=Y, anchor=N)
+            bilet = Button(left_frame, text=nazwa,
+                          height=WYSOKOSC, width=SZEROKOSC,
+                           bg=KOLOR, overrelief=SUNKEN,
+                          command=lambda: self.keys_operation(i))
 
-        k_bilet5 = Button(left_frame, text="Bilet normalny 90 min\n6zł",
-                          height=WYSOKOSC, width=SZEROKOSC, bg=KOLOR,
-                          overrelief=SUNKEN,
-                          command=lambda: self.keys_operation(4))
-        k_bilet5.pack(fill=Y, anchor=N)
+            bilet.pack(fill=Y, anchor=N)
 
-        k_bilet6 = Button(left_frame, text="Bilet ulgowy 90 min\n3zł",
-                          height=WYSOKOSC,
-                          width=SZEROKOSC, bg=KOLOR, overrelief=SUNKEN,
-                          command=lambda: self.keys_operation(5))
-        k_bilet6.pack(fill=Y, anchor=N)
+            k_bilety.append(bilet)
 
         self.screen = Text(side_frame, width=SZEROKOSC, height=10, wrap=WORD)
         self.screen.pack(fill=Y, anchor=N)
@@ -117,13 +105,14 @@ class Maschine (Frame):
                          command=lambda: self.keys_operation(11))
         key_kup.pack(fill=Y, anchor=N)
 
-        key_oddaj = Button(side_frame, text="Zabierz reszte", width=SZEROKOSC,
-                           height=2, bg="#A7A7A7", overrelief=SUNKEN,
+        key_oddaj = Button(side_frame, text="Zabierz reszte",
+                           width=SZEROKOSC, height=2, bg="#A7A7A7",
+                           overrelief=SUNKEN,
                            command=lambda: self.take_coins())
         key_oddaj.pack(fill=Y, anchor=N)
 
-        key_cofnij = Button(side_frame, text="Od początku", width=SZEROKOSC, height=2,
-                            bg="#A7A7A7", overrelief=SUNKEN,
+        key_cofnij = Button(side_frame, text="Od początku", width=SZEROKOSC,
+                            height=2, bg="#A7A7A7", overrelief=SUNKEN,
                             command=lambda: self.keys_operation(10))
         key_cofnij.pack(fill=Y, anchor=N)
 
