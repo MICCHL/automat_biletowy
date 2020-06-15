@@ -79,7 +79,7 @@ class Maschine (Frame):
             bilet = Button(left_frame, text=nazwa,
                           height=WYSOKOSC, width=SZEROKOSC,
                            bg=KOLOR, overrelief=SUNKEN,
-                          command=lambda: self.keys_operation(i))
+                          command=lambda i=i: self.keys_operation(i))
 
             bilet.pack(fill=Y, anchor=N)
 
