@@ -1,10 +1,10 @@
 import interface
-import tkinter as tk
+import tkinter
 
 
 def main():
     try:
-        root = tk.tkinter.Tk()
+        root = tkinter.Tk()
         root.geometry("389x515")
 
         root.resizable(width=False, height=False)
