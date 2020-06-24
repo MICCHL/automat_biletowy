@@ -1,11 +1,7 @@
-from tkinter import BOTTOM
-from tkinter import Button
-from tkinter import Frame
-from tkinter import Text
-from tkinter import Y
+import tkinter as tk
 
 
-class Give_Back(Frame):
+class Give_Back(tk.Frame):
     def __init__(self, master, bc, text):
 
         super().__init__(master)
@@ -17,23 +13,21 @@ class Give_Back(Frame):
 
     def create_widgets(self, x):
 
-        top_frame = Frame(self)
-        top_frame.pack(fill=Y)
-        low_frame = Frame(self)
-        low_frame.pack(side=BOTTOM, fill=Y)
+        top_frame = tk.Frame(self)
+        top_frame.pack(fill=tk.Y)
+        low_frame = tk.Frame(self)
+        low_frame.pack(side=tk.BOTTOM, fill=tk.Y)
 
-        self.coins_list = Text(top_frame, width=25, height=20, bg="white")
+        self.coins_list = tk.Text(top_frame, width=25, height=20, bg="white")
         self.coins_list.pack()
         self.write_coins()
 
-        self.key1 = Button(low_frame, text="Zabierz", height=3, width=28,
+        self.key1 = tk.Button(low_frame, text="Zabierz", height=3, width=28,
                            background="red", command=lambda: self.back(x))
         self.key1.pack()
 
     def write_coins(self):
 
-        lista = ""
-        lista += self.typ + " :\n"
         lista = '\n'.join([f'{self.typ} :'] + [str(c) for c in self.coins])
 
         self.coins_list.insert(0.0, lista)
