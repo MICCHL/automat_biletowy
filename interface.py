@@ -1,15 +1,4 @@
-from tkinter import Button
-from tkinter import END
-from tkinter import Frame
-from tkinter import LEFT
-from tkinter import RIGHT
-from tkinter import N
-from tkinter import SUNKEN
-from tkinter import Text
-from tkinter import Tk
-from tkinter import WORD
-from tkinter import X
-from tkinter import Y
+import tkinter as tk
 
 from Give_Back import Give_Back
 from Throwing_coins import Throwing_coins
@@ -27,9 +16,9 @@ ILOSC = [3, 5, 4, 0, 12, 0, 14, 0, 4, 0, 55, 100]
 
 
 
-class Maschine (Frame):
+class Maschine (tk.Frame):
     def __init__(self, parent):
-        Frame.__init__(self, parent)
+        tk.Frame.__init__(self, parent)
 
         self.parent = parent
 
@@ -56,12 +45,12 @@ class Maschine (Frame):
     def create_widgets(self):
 
         self.parent.title("Automat biletowy MPK")
-        self.pack(fill=X, expand=True)
+        self.pack(fill=tk.X, expand=True)
 
-        left_frame = Frame(self)
-        left_frame.pack(side=LEFT, fill=Y)
-        side_frame = Frame(self)
-        side_frame.pack(side=RIGHT, fill=Y)
+        left_frame = tk.Frame(self)
+        left_frame.pack(side=tk.LEFT, fill=tk.Y)
+        side_frame = tk.Frame(self)
+        side_frame.pack(side=tk.RIGHT, fill=tk.Y)
 
         nazwy_biletów = [
             'Bilet normalny 20 min\n3,40 zł',
@@ -76,45 +65,45 @@ class Maschine (Frame):
 
         for i, nazwa in enumerate(nazwy_biletów):
 
-            bilet = Button(left_frame, text=nazwa,
+            bilet = tk.Button(left_frame, text=nazwa,
                           height=WYSOKOSC, width=SZEROKOSC,
-                           bg=KOLOR, overrelief=SUNKEN,
+                           bg=KOLOR, overrelief=tk.SUNKEN,
                           command=lambda i=i: self.keys_operation(i))
 
-            bilet.pack(fill=Y, anchor=N)
+            bilet.pack(fill=tk.Y, anchor=tk.N)
 
             k_bilety.append(bilet)
 
-        self.screen = Text(side_frame, width=SZEROKOSC, height=10, wrap=WORD)
-        self.screen.pack(fill=Y, anchor=N)
+        self.screen = tk.Text(side_frame, width=SZEROKOSC, height=10, wrap=tk.WORD)
+        self.screen.pack(fill=tk.Y, anchor=tk.N)
         self.screen.insert(0.0, f'Nazwa: {self.text} \nKwota:{self.sum_ticket}'
                                 f' \nWrzucono:{self.sum_coins}')
 
-        key_wrzuc = Button(side_frame, text="Zapłać", width=SZEROKOSC, height=4,
-                           bg="#55A41C", overrelief=SUNKEN,
+        key_wrzuc = tk.Button(side_frame, text="Zapłać", width=SZEROKOSC, height=4,
+                           bg="#55A41C", overrelief=tk.SUNKEN,
                            command=self.throw_coins)
-        key_wrzuc.pack(fill=Y, anchor=N)
+        key_wrzuc.pack(fill=tk.Y, anchor=tk.N)
 
-        key_oddaj = Button(side_frame, text="Zwróć monety", width=SZEROKOSC, height=4,
-                           bg="#C91F16", overrelief=SUNKEN,
-                           command=lambda: self.g_b_coins())
-        key_oddaj.pack(fill=Y, anchor=N)
+        key_oddaj = tk.Button(side_frame, text="Zwróć monety", width=SZEROKOSC, height=4,
+                           bg="#C91F16", overrelief=tk.SUNKEN,
+                           command=self.g_b_coins)
+        key_oddaj.pack(fill=tk.Y, anchor=tk.N)
 
-        key_kup = Button(side_frame, text="KUP", width=SZEROKOSC, height=4,
-                         bg="white", overrelief=SUNKEN,
+        key_kup = tk.Button(side_frame, text="KUP", width=SZEROKOSC, height=4,
+                         bg="white", overrelief=tk.SUNKEN,
                          command=lambda: self.keys_operation(11))
-        key_kup.pack(fill=Y, anchor=N)
+        key_kup.pack(fill=tk.Y, anchor=tk.N)
 
-        key_oddaj = Button(side_frame, text="Zabierz reszte",
+        key_oddaj = tk.Button(side_frame, text="Zabierz reszte",
                            width=SZEROKOSC, height=2, bg="#A7A7A7",
-                           overrelief=SUNKEN,
-                           command=lambda: self.take_coins())
-        key_oddaj.pack(fill=Y, anchor=N)
+                           overrelief=tk.SUNKEN,
+                           command=self.take_coins)
+        key_oddaj.pack(fill=tk.Y, anchor=tk.N)
 
-        key_cofnij = Button(side_frame, text="Od początku", width=SZEROKOSC,
-                            height=2, bg="#A7A7A7", overrelief=SUNKEN,
+        key_cofnij = tk.Button(side_frame, text="Od początku", width=SZEROKOSC,
+                            height=2, bg="#A7A7A7", overrelief=tk.SUNKEN,
                             command=lambda: self.keys_operation(10))
-        key_cofnij.pack(fill=Y, anchor=N)
+        key_cofnij.pack(fill=tk.Y, anchor=tk.N)
 
     def center(self):
         self.master.update_idletasks()
@@ -139,7 +128,7 @@ class Maschine (Frame):
 
     def throw_coins(self):
 
-        pocket = Tk()
+        pocket = tk.Tk()
         pocket.title("Portfel")
         pckt = Throwing_coins(pocket)
         pocket.mainloop()
@@ -158,7 +147,7 @@ class Maschine (Frame):
         print("zwrócone :", self.money_rest)
         self.monety_wrzucane = []
         self.sum_coins = 0.0
-        self.screen.delete(0.0, END)
+        self.screen.delete(0.0, tk.END)
         self.screen.insert(0.0, f'Nazwa: {self.text} \nKwota: '
                                 f'{self.sum_ticket} '
                                 f'\nWrzucono: {self.sum_coins}')
@@ -166,7 +155,7 @@ class Maschine (Frame):
     def take_coins(self):
 
         print("reszta :", self.money_rest)
-        mach = Tk()
+        mach = tk.Tk()
         mach.title("Zabierz RESZTĘ!")
         gbc = Give_Back(mach, self.money_rest, "Twoja reszta")
         mach.mainloop()
@@ -178,7 +167,7 @@ class Maschine (Frame):
 
     def take_product(self):
 
-        prod = Tk()
+        prod = tk.Tk()
         prod.title("Zabierz bilety ")
         gbc = Give_Back(prod, self.buy_ticket, "Twoje bilety ")
         prod.mainloop()
@@ -300,7 +289,7 @@ class Maschine (Frame):
 
     def take_coins(self):
         print("reszta :", self.money_rest)
-        mach = Tk()
+        mach = tk.Tk()
         mach.title("Zabierz RESZTĘ ")
         gbc = Give_Back(mach, self.money_rest, "Twoja reszta")
         mach.mainloop()
@@ -311,7 +300,7 @@ class Maschine (Frame):
 
     def take_ticket(self):
 
-        prod = Tk()
+        prod = tk.Tk()
         prod.title("Odbierz bilet")
         gbc = Give_Back(prod, self.kupione_bilety, "Twoje bilety ")
         prod.mainloop()
@@ -321,6 +310,6 @@ class Maschine (Frame):
 
     def write(self, text):
 
-        self.screen.delete(0.0, END)
+        self.screen.delete(0.0, tk.END)
         self.screen.insert(0.0, text)
 
