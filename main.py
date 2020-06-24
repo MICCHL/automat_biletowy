@@ -1,15 +1,15 @@
-from interface import Maschine
-from tkinter import *
+import interface
+import tkinter as tk
 
 
 def main():
     try:
-        root = Tk()
+        root = tk.tkinter.Tk()
         root.geometry("389x515")
 
         root.resizable(width=False, height=False)
 
-        app = Maschine(root)
+        app = interface.Maschine(root)
         root.mainloop()
     except:
        print("Błąd w module main!!\nTworzenie okna głównego ")
