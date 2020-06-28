@@ -1,24 +1,24 @@
 class Coin:
-    def __init__(self, money=0.0, number=0):
-        self.__nominal = money
-        self.__ilosc = number
+    def __init__(self, nominal=0.0, amount=0):
+        self.__nominal = nominal
+        self.__amount = amount
 
     def __str__(self):
         text = ""
-        text += f'{str(self.__nominal)} ilość : {str(self.__ilosc)}'
+        text += f'{str(self.__nominal)} ilość : {str(self.__amount)}'
         return text
 
-    def wartosc(self):
-        return round(self.__nominal * self.__ilosc, 2)
+    def value(self):
+        return round(self.__nominal * self.__amount, 2)
 
     def get_nominal(self):
         return round(self.__nominal, 2)
 
-    def get_ilosc(self):
-        return self.__ilosc
+    def get_amount(self):
+        return self.__amount
 
-    def inc(self):
-        self.__ilosc += 1
+    def increment_amount(self):
+        self.__amount += 1
 
-    def dec(self):
-        self.__ilosc -= 1
+    def decrement_amount(self):
+        self.__amount -= 1
