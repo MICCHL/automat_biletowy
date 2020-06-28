@@ -1,5 +1,6 @@
-import interface
 import tkinter
+
+import interface
 
 
 def main():
@@ -9,10 +10,10 @@ def main():
 
         root.resizable(width=False, height=False)
 
-        app = interface.Maschine(root)
+        interface.Machine(root)
         root.mainloop()
-    except:
-       print("Błąd w module main!!\nTworzenie okna głównego ")
+    except Exception:
+        print("Błąd w module main!!\nTworzenie okna głównego ")
 
 
 if __name__ == "__main__":
