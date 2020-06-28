@@ -1,31 +1,26 @@
-
 class Ticket:
     count = 0
-    def __init__(self, name = "", prize = 0.0):
 
-        self.__nazwa = name
-        self.__cena = prize
-        self.__nr_produktu = Ticket.count
-        Ticket.counting()
+    def __init__(self, name="", price=0.0):
+        self.__name = name
+        self.__price = price
+        self.__product_id = Ticket.count
+        Ticket.generate_id()
 
     def __str__(self):
         text = ""
-        text += f'{self.__nazwa} :{self.__cena}'
+        text += f'{self.__name} :{self.__price}'
         return text
 
-
     @staticmethod
-    def counting():
+    def generate_id():
         Ticket.count += 1
 
-    def get_cena(self):
+    def get_price(self):
+        return self.__price
 
-        return self.__cena
+    def get_name(self):
+        return self.__name
 
-    def get_nazwa(self):
-
-        return self.__nazwa
-
-    def get_nr(self):
-
-        return self.__nr_produktu
+    def get_product_id(self):
+        return self.__product_id
