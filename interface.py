@@ -14,7 +14,7 @@ class Machine(tk.Frame):
     PAY = "Zapłać"
     GIVE_BACK_COINS = "Zwróć monety"
     PURCHASE = "KUP"
-    TAKE_REST = "Zabierz reszte"
+    TAKE_change = "Zabierz reszte"
     START_AGAIN = "Od początku"
     BACK = "Wróć"
 
@@ -82,12 +82,12 @@ class Machine(tk.Frame):
 
         purchase_button.pack(fill=tk.Y, anchor=tk.N)
 
-        take_rest_button = tk.Button(side_frame, text=Machine.TAKE_REST,
+        take_change_button = tk.Button(side_frame, text=Machine.TAKE_change,
                                      width=Constants.BUTTON_WIDTH, height=2,
                                      bg=Colour.GREY, overrelief=tk.SUNKEN,
                                      command=self.take_coins)
 
-        take_rest_button.pack(fill=tk.Y, anchor=tk.N)
+        take_change_button.pack(fill=tk.Y, anchor=tk.N)
 
         start_again = tk.Button(side_frame, text=Machine.START_AGAIN,
                                 width=Constants.BUTTON_WIDTH, height=2,
@@ -190,7 +190,7 @@ class Machine(tk.Frame):
     def take_coins(self):
         mach = tk.Tk()
         mach.title("Zabierz RESZTĘ ")
-        GiveBackFrame(mach, self.payment_service.rest_coins, "Twoja reszta")
+        GiveBackFrame(mach, self.payment_service.change_coins, "Twoja reszta")
         mach.mainloop()
         self.text = ""
         self.write(f'Nazwa: {self.text} \nKwota: {self.payment_service.get_ticket_cost()} '

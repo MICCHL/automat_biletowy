@@ -4,9 +4,7 @@ class Coin:
         self.__amount = amount
 
     def __str__(self):
-        text = ""
-        text += f'{str(self.__nominal)} ilość : {str(self.__amount)}'
-        return text
+        return f'{str(self.__nominal)} ilość : {str(self.__amount)}'
 
     def value(self):
         return round(self.__nominal * self.__amount, 2)
