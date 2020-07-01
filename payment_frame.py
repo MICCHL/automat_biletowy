@@ -27,9 +27,10 @@ class PaymentFrame(tkinter.Frame):
         label.pack(fill=tkinter.Y, anchor=tkinter.W)
 
         for nominal in Constants.NOMINAL:
-            nominal_button = tkinter.Button(left_frame, text=f'{nominal} zł', height=PaymentFrame.HEIGHT,
-                                    width=PaymentFrame.WIDTH, background=Colour.WHITE,
-                                    command=lambda nominal=nominal: self.throw(nominal, master))
+            nominal_button = tkinter.Button(
+                left_frame, text=f'{nominal} zł', height=PaymentFrame.HEIGHT,
+                width=PaymentFrame.WIDTH, background=Colour.WHITE,
+                command=lambda nominal=nominal: self.throw(nominal, master))
             nominal_button.pack(fill=tkinter.Y, anchor=tkinter.W)
 
         back_button = tkinter.Button(left_frame, text=PaymentFrame.BACK, height=2,
