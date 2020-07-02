@@ -14,8 +14,8 @@ class PaymentService:
         self.change_coins = []
 
     def init_coins(self):
-        for x in range(12):
-            self.machine_coins.append(Coin(nominal=Constants.NOMINAL[x], amount=Constants.AMOUNT[x]))
+        for nominal, coin in zip(Constants.NOMINAL, Constants.AMOUNT):
+            self.machine_coins.append(Coin(nominal, coin))
 
     def add_coin(self, coin):
         self.user_balance += coin
